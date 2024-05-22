@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default function EditProduct() {
+export default function EditProduct({fetchData}) {
     const { id } = useParams();
     const navigate = useNavigate();
     const [product, setProduct] = useState({ name: '', quantity: '', price: '' });
@@ -25,10 +25,7 @@ export default function EditProduct() {
       }, [id]);
       
 
-    const handleChange = (e) => {
-        setProduct({ ...product, [e.target.name]: e.target.value });
-    };
-
+ 
     const handleSubmit = async (e) => {
         e.preventDefault();
       
@@ -38,7 +35,7 @@ export default function EditProduct() {
       
           localStorage.setItem('flashMessage', JSON.stringify({ message: 'Product updated successfully', type: 'alert-success' }));
       
-          setProduct(response.data);
+          await fetchData()
           navigate('/');
         } catch (error) {
           console.error('There was an error updating the product!', error);

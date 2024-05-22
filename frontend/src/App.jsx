@@ -37,9 +37,9 @@ export default function App() {
       <div className="App">
         <a href="/"><h1>Products</h1></a>
         <Routes>
-          <Route path="/" element={<ProductTable data={data} onEdit={() => fetchProducts()} onDelete={handleDelete} />} />
+          <Route path="/" element={<ProductTable data={data} onDelete={handleDelete} />} />
           <Route path="/addProducts" element={<AddProduct />} />
-          <Route path="/editProducts/:id" element={<EditProduct />} />
+          <Route path="/editProducts/:id" element={<EditProduct fetchData={fetchData} />} />
         </Routes>
       </div>
     </Router>
